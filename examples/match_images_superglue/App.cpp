@@ -65,6 +65,15 @@ int main(int argc, char* argv[])
     cv::drawMatches(images[0], keyPointsList[0], images[1], keyPointsList[1], matches, res, cv::Scalar::all(-1),
                     cv::Scalar::all(-1), matchMask, cv::DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS);
 
+    auto netvlad_ptr_ = std::make_shared<netvlad_torch>("/home/vuong/Dev/prv/torch_test/torch_cpp/data/traced_pytorch_netvlad.pt");
+    
+    at::Tensor rep0;
+    netvlad_ptr_->transform(grays[0], rep0);
+    at::Tensor rep1;
+    netvlad_ptr_->transform(grays[1], rep1);
+
+    auto similarity_score = netvlad_torch::score(rep0, rep1);
+    std::cout  << "similarity_score: " << similarity_score << std::endl;
     cv::imwrite("super_point_super_glue_good_matches.jpg", res);
     cv::imshow("super_point_super_glue_good_matches", res);
     cv::waitKey();

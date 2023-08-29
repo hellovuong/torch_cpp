@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.10)
 set(SOURCE_FILES
   ${PROJECT_SOURCE_DIR}/src/SuperGlue.cpp
   ${PROJECT_SOURCE_DIR}/src/SuperPoint.cpp
+  ${PROJECT_SOURCE_DIR}/src/NetVLAD.cpp
 )
 
 add_library(${LIBRARY_NAME}
@@ -21,7 +22,6 @@ target_include_directories(${LIBRARY_NAME}
 target_link_libraries(${LIBRARY_NAME}
   PUBLIC
     ${OpenCV_LIBRARIES}
-  PRIVATE
     ${TORCH_LIBRARIES}
 )
 
@@ -37,6 +37,6 @@ set_target_properties(${LIBRARY_NAME}
 )
 
 target_compile_features(${LIBRARY_NAME}
-  PRIVATE
+  PUBLIC
     cxx_std_17
 )

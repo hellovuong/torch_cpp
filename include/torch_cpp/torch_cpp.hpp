@@ -11,4 +11,6 @@
 
 #include "SuperPoint.hpp"
 
+#include "NetVLAD.hpp"
+
 #include "Utility.hpp"
